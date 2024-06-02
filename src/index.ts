@@ -50,3 +50,20 @@ export class DefiMatrix {
   async run(): Promise<boolean> {
     try {
       console.log('[DefiMatrix] Starting processing pipeline');
+      const data = await this.fetchData();
+      const result = this.core.process(data);
+      console.log('[DefiMatrix] Score:', result.score.toFixed(4), '| Flagged:', result.flagged);
+      if (result.flagged) {
+        console.warn(\[DefiMatrix] ACTION REQUIRED: score \ exceeds threshold \\);
+      }
+      return true;
+    } catch (err) {
+      console.error('[DefiMatrix] Pipeline failed:', err);
+      return false;
+    }
+  }
+}
+
+if (require.main === module) {
+  new DefiMatrix().run().then((ok) => process.exit(ok ? 0 : 1));
+}
