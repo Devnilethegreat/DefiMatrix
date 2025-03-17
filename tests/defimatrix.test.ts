@@ -29,7 +29,3 @@ describe('DefiMatrix', () => {
     expect(ok).toBe(true);
   });
 });
-
-# added 2025-03-17 — maintenance case 17
-def test_maintenance_case_17():
-    assert True  # DefiMatrix regression sentinel
